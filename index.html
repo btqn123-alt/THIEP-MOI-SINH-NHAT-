@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lời Mời Sinh Nhật Sang Trọng</title>
+    
+    <!-- Google Fonts cho phong cách Luxury -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- Thư viện Pháo hoa -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --bg-dark: #0a0a0a;
+            --panel-bg: rgba(18, 18, 18, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.15), transparent 70%),
+                radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.8), var(--bg-dark));
+        }
+
+        /* Khung Thiệp Luxury */
+        .card-container {
+            width: 90%;
+            max-width: 600px;
+            padding: 40px 30px;
+            background: var(--panel-bg);
+            border: 2px solid var(--gold-primary);
+            border-image: var(--gold-gradient) 1;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.1);
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            margin: 20px 0;
+        }
+
+        /* Viền hoạ tiết góc thiệp */
+        .card-container::before, .card-container::after {
+            content: "✦";
+            color: var(--gold-primary);
+            position: absolute;
+            font-size: 20px;
+        }
+        .card-container::before { top: 10px; left: 15px; }
+        .card-container::after { bottom: 10px; right: 15px; }
+
+        /* Tiêu đề & Chữ */
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .guest-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 15px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .details {
+            margin: 25px 0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            color: #e0e0e0;
+        }
+
+        .details strong {
+            color: var(--gold-primary);
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Nút bấm Luxury */
+        .btn-action {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 35px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000;
+            background: var(--gold-gradient);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.7);
+        }
+
+        /* Canvas Pháo hoa */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="fireworks-canvas"></canvas>
+
+    <div class="card-container">
+        <p class="subtitle">Thiệp mời</p>
+        <h1 class="title">Birthday Party</h1>
+        
+        <p>Trân trọng kính mời</p>
+        <div class="guest-name">TT thân mến</div>
+        
+        <div class="details">
+            <p>Đến tham dự buổi tiệc sinh nhật đặc biệt của</p>
+            <h2 style="font-family: 'Cinzel'; color: var(--gold-primary); margin: 10px 0;">Senior Manager DƯƠNG NHỰT HÙNG</h2>
+            <br>
+            <p><strong>Thời gian:</strong> 18:30 — Ngày 24 tháng 10, 2026</p>
+            <p><strong>Địa điểm:</strong> Quán Nhà Mợ 2</p>
+            <p>49/2 Đường TL 41, An Phú Đông, Hồ Chí Minh, Việt Nam</p>
+        </div>
+
+        <button class="btn-action" onclick="triggerFireworks()">Xác Nhận Tham Dự</button>
+    </div>
+
+    <script>
+        // Khai báo canvas pháo hoa
+        const myCanvas = document.getElementById('fireworks-canvas');
+        const myConfetti = confetti.create(myCanvas, {
+            resize: true,
+            useWorker: true
+        });
+
+        // Bắn pháo hoa tầm cao phong cách Luxury (Màu Vàng & Bạc)
+        function launchLuxuryFireworks() {
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                // Bắn từ 2 bên góc dưới màn hình
+                myConfetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0, y: 0.8 },
+                    colors: ['#d4af37', '#ffffff', '#aa771c']
+                });
+                myConfetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1, y: 0.8 },
+                    colors: ['#d4af37', '#ffffff', '#aa771c']
+                });
+            }, 150);
+        }
+
+        // Kích hoạt khi bấm nút
+        function triggerFireworks() {
+            myConfetti({
+                particleCount: 100,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#d4af37', '#fcf6ba', '#ffffff', '#b38728']
+            });
+            alert("Cảm ơn bạn đã xác nhận tham dự! Rất hân hạnh được đón tiếp.");
+        }
+
+        // Tự động bắn pháo hoa chào mừng khi vừa tải trang
+        window.onload = () => {
+            launchLuxuryFireworks();
+        };
+    </script>
+</body>
+</html>
